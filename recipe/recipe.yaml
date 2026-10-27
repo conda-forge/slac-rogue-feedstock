@@ -10,7 +10,7 @@ source:
   sha256: c73e35472c7b248398a48cf466eb8587dff32c2c222de351cec0862b3d700242
 
 build:
-  number: 3
+  number: 4
   skip:
     - win
     - osx
@@ -47,6 +47,7 @@ requirements:
     - qtpy >=2.0
     - pyqt 5.*  # Qt binding for qtpy/pydm, which no longer pulls one in
     - pyqtgraph >=0.13
+    - pyte >=0.8
     - matplotlib-base
     - ipython  # slaclab/surf dep
     - jsonpickle  # slaclab/surf dep
