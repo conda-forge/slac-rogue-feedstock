@@ -10,7 +10,7 @@ source:
   sha256: c73e35472c7b248398a48cf466eb8587dff32c2c222de351cec0862b3d700242
 
 build:
-  number: 1
+  number: 2
   skip:
     - win
     - osx
@@ -47,6 +47,10 @@ requirements:
     - qtpy >=2.0
     - pyqtgraph >=0.13
     - matplotlib-base
+    - ipython  # slaclab/surf dep
+    - jsonpickle  # slaclab/surf dep
+    - parse  # slaclab/surf dep
+    - click  # slaclab/surf dep
     - rdma-core
 
 tests:
