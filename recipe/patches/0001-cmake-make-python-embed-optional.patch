@@ -1,0 +1,44 @@
+Make Python3 Development.Embed optional
+
+conda-forge python builds no longer ship libpython, so requiring the full
+Development component (Module + Embed) fails at configure time on py3.15.
+Require Development.Module only and clear Python3_LIBRARIES when Embed is
+not found. Backport of https://github.com/slaclab/rogue/pull/1322; drop
+this patch once the upstream release includes it.
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 3ec1f0cc1..b9434ef70 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -97,7 +97,12 @@ if ( NOT NO_PYTHON )
+ 
+    # Find newest python interpreter first
+    set(Python3_FIND_STRATEGY "LOCATION")
+-   find_package(Python3 QUIET REQUIRED COMPONENTS Interpreter Development)
++   # Embed (libpython) is optional: conda-forge python no longer ships libpython
++   find_package(Python3 QUIET REQUIRED COMPONENTS Interpreter Development.Module
++                OPTIONAL_COMPONENTS Development.Embed)
++   if (NOT Python3_Development.Embed_FOUND)
++      set(Python3_LIBRARIES "")
++   endif()
+ 
+    # Find Numpy
+    execute_process(
+diff --git a/templates/RogueConfig.cmake.in b/templates/RogueConfig.cmake.in
+index 97dc33cd1..f50af7663 100644
+--- a/templates/RogueConfig.cmake.in
++++ b/templates/RogueConfig.cmake.in
+@@ -48,7 +48,12 @@ if ( NOT NO_PYTHON )
+ 
+    # Find newest python interpreter first
+    set(Python3_FIND_STRATEGY "LOCATION")
+-   find_package(Python3 QUIET REQUIRED COMPONENTS Interpreter Development)
++   # Embed (libpython) is optional: conda-forge python no longer ships libpython
++   find_package(Python3 QUIET REQUIRED COMPONENTS Interpreter Development.Module
++                OPTIONAL_COMPONENTS Development.Embed)
++   if (NOT Python3_Development.Embed_FOUND)
++      set(Python3_LIBRARIES "")
++   endif()
+ 
+    # Find Numpy
+    execute_process(
