@@ -8,8 +8,6 @@ package:
 source:
   url: https://github.com/slaclab/rogue/archive/refs/tags/v${{ version }}.tar.gz
   sha256: a36c1372a5bcf142c62535ec9d2539a0ba5a34c846ef0edc4a5db85730e6e877
-  patches:
-    - patches/0001-cmake-make-python-embed-optional.patch
 
 build:
   number: 0
