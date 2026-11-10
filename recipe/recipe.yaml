@@ -1,5 +1,5 @@
 context:
-  version: "6.16.0"
+  version: "6.17.0"
 
 package:
   name: slac-rogue
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://github.com/slaclab/rogue/archive/refs/tags/v${{ version }}.tar.gz
-  sha256: bae93a9c8c7e733e32cd63505055a20441aaebd6123f1ea84f614570037e96c8
+  sha256: a36c1372a5bcf142c62535ec9d2539a0ba5a34c846ef0edc4a5db85730e6e877
   patches:
     - patches/0001-cmake-make-python-embed-optional.patch
 
 build:
-  number: 1
+  number: 0
   skip:
     - win
     - osx
